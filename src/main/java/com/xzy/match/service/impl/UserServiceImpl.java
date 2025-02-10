@@ -34,8 +34,7 @@ import org.springframework.util.DigestUtils;
 /**
  * 用户服务实现
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
+
  */
 @Service
 @Slf4j
@@ -306,7 +305,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (CollUtil.isNotEmpty(userList)) {
             return new ArrayList<>();
         }
-        return userList.stream().
+        List<UserVO> userVOList = userList.stream().
                 filter(user -> {
                     String userTags = user.getTags();
                     if(StringUtils.isNotEmpty(userTags)) {
@@ -319,5 +318,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                     }
                     return true;
                 }).map(this::getUserVO).collect(Collectors.toList());
+        System.out.println(userVOList);
+        return userVOList;
     }
 }
